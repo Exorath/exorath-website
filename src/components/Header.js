@@ -3,19 +3,12 @@
  */
 
 const React = require('react');
-
-import styled from 'styled-components'
+import Button from 'react-bootstrap/';
+import styled, {keyframes} from 'styled-components'
 
 const HeaderRoot = styled.header`
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: -ms-flex;
     display: flex;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    -ms-align-items: center;
     align-items: center;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -27,7 +20,7 @@ const HeaderRoot = styled.header`
     overflow: hidden;
     font-size: 16pt;
     font-family: "Source Sans Pro", Helvetica, sans-serif;
-`
+`;
 
 const Logo = styled.div`
     background-color: #c16161;
@@ -41,26 +34,60 @@ const Logo = styled.div`
     &:last-child {
         margin-bottom: 0;
     }
-`
+`;
 
 const Title = styled.a`
     display: block;
     text-transform: uppercase;
-    font-size: 1em;
+    font-size: 1.2em;
     border-bottom: 0;
     color: #ffffff !important;
-    padding: 0 3em 0 1.5em;
+    padding: 0 1.5em 0 1.5em;
     text-decoration: none;
-    > span {
-      margin-left: 0.5em;
-    font-size: 0.9em;
-    color: GhostWhite;
+    
     &:hover {
-        color: IndianRed;
+        > span,strong {
+        color: Maroon;}
       }
+    > span {
+    font-size: 0.4em;
+    color: GhostWhite;
       
     }
-`
+`;
+
+const NavLink = `    border-bottom: 0;
+                color: #404040;
+                display: block;
+                font-size: 0.8em;
+                font-weight: 900;
+                letter-spacing: 0.075em;
+                    padding: 0 2.0625em;
+                text-decoration: none;
+                text-transform: uppercase;
+                transition: color 0.3s ease-in-out 0s;
+                &:hover {
+                  color: #c16161;
+                }
+                &:before {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 2px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: #000;
+                    visibility: hidden;
+                    -webkit-transform: scaleX(0);
+                    transform: scaleX(0);
+                    -webkit-transition: all 0.3s ease-in-out 0s;
+                    transition: all 0.3s ease-in-out 0s;
+                }
+                &:hover:before {
+                    visibility: visible;
+                    -webkit-transform: scaleX(1);
+                    transform: scaleX(1);
+                }`
 const Nav = styled.nav`
     -moz-flex: 1;
     -webkit-flex: 1;
@@ -87,22 +114,40 @@ const Nav = styled.nav`
             padding: 0;
             position: relative;
             > a {
-                border-bottom: 0;
-                color: #404040;
-                display: block;
-                font-size: 0.8em;
-                font-weight: 900;
-                letter-spacing: 0.075em;
-                    padding: 0 2.0625em;
-                text-decoration: none;
-                text-transform: uppercase;
+              ${NavLink}
             }
-        &:firstChild {
-          border-left: 0;
-        }
         }
     }
-`
+`;
+
+const Ribbon = styled.div`
+{
+  position: absolute;
+  right: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px; height: 75px;
+  text-align: right;
+  
+  pointer-events: none;
+> span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  background: #79A70A;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px; right: -21px;
+
+}
+}
+`;
 class Header extends React.Component {
     getInitialState() {
         return {
@@ -124,17 +169,17 @@ class Header extends React.Component {
 
     render() {
         return (
-            <HeaderRoot id='home'>
+            <HeaderRoot class='.hidden-sm-down' id='home'>
                 <Logo>
-                    <Title href="index.html"><strong>Exorath</strong>
-                        <span>play.exorath.com</span></Title>
+                    <Title href="index.html"><span>play.</span><strong>Exorath</strong><span>.com</span>
+                        </Title>
                 </Logo>
                 <Nav id="nav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="generic.html">Store</a></li>
                         <li><a href="generic.html">Forums</a></li>
                         <li><a href="generic.html">Support</a></li>
+                        <li><Ribbon><span>Online</span></Ribbon><a href="generic.html">Store</a></li>
                     </ul>
                 </Nav>
             </HeaderRoot>
